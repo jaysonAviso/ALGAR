@@ -11,7 +11,7 @@ builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
 builder.Services.AddDbContext<DataContext>(opt =>
     {
-        opt.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+        opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
     }
 );
 

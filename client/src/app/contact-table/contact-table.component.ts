@@ -38,12 +38,6 @@ export class ContactTableComponent implements OnInit {
     this.contactService.getContactByLastname(lastname.value).subscribe(contacts => {
       this.contacts = contacts;
     });
-
-    // if(lastname.value !== ""){
-    //     this.router.navigateByUrl('/contactForm/lastname/' + lastname.value);
-    // }else {
-    //   console.log("lastname not match");
-    // }
   }
 
 }
