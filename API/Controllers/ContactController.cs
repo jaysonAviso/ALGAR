@@ -34,9 +34,9 @@ namespace API.Controllers
         }
 
         [HttpGet("lastname/{lastname}")]
-        public async Task<ActionResult<Contact>> GetContactByLastname(string lastname)
+        public async Task<ActionResult<IEnumerable<Contact>>> GetContactByLastname(string lastname)
         {
-            return await _contactRepository.GetContactByLastnameAsync(lastname.ToLower());
+            return Ok(await _contactRepository.GetContactByLastnameAsync(lastname.ToLower()));
         }
 
         [HttpPost]

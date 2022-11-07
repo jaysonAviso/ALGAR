@@ -6,6 +6,7 @@ using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
@@ -56,9 +57,12 @@ namespace API.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<Contact> GetContactByLastnameAsync(string lastname)
+        public async Task<IEnumerable<ContactDto>> GetContactByLastnameAsync(string lastname)
         {
-            return await _context.Contacts.SingleOrDefaultAsync(x => x.LastName == lastname);
+            // return await _context.Contacts.SingleOrDefaultAsync(x => x.LastName == lastname);
+            return await _context.Contacts
+                .Where(x => x.LastName == lastname)
+                .ProjectTo<ContactDto>(_mapper.ConfigurationProvider).ToListAsync();
         }
 
         public void Update(Contact contact)

@@ -19,7 +19,9 @@ export class ContactFormComponent implements OnInit {
   ngOnInit(): void {
     this.initializeForm();
     this.getContactById();
-    // this.getContactByUsername();
+    
+    // if (this.route.snapshot.paramMap.get('id') != null)
+    //   this.getContactByUsername();
   }
 
   initializeForm() {
@@ -43,20 +45,22 @@ export class ContactFormComponent implements OnInit {
     }
   }
 
-  getContactByUsername() {
-    const lastname = this.route.snapshot.paramMap.get('lastname');
-    console.log(lastname);
-    console.log(this.updateMode);
-    if (lastname == '') {
-      this.updateMode = false;
-    } else {
-      this.contactService.getContactByLastname(lastname).subscribe(contact => {
-      this.contact = contact;
-      console.log(this.contact);
-      this.setContactValue();
-    });
-    }
-  }
+  // getContactByUsername() {
+  //   const lastname = this.route.snapshot.paramMap.get('lastname');
+  //   console.log(lastname);
+  //   console.log(this.updateMode);
+  //   if (lastname == null)
+  //     this.updateMode = true
+  //   if (lastname == '') {
+  //     this.updateMode = false;
+  //   } else {
+  //     this.contactService.getContactByLastname(lastname).subscribe(contact => {
+  //     this.contact = contact;
+  //     console.log(this.contact);
+  //     this.setContactValue();
+  //   });
+  //   }
+  // }
 
   setContactValue() {
     this.registerForm.patchValue({

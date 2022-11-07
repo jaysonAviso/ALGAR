@@ -19,7 +19,7 @@ export class ContactService {
   }
 
   getContactByLastname(lastname: string) {
-    return this.http.get<Contact>(this.baseUrl + 'contact/lastname/' + lastname); 
+    return this.http.get<Contact[]>(this.baseUrl + 'contact/lastname/' + lastname); 
   }
 
   registerContact(contact: any){

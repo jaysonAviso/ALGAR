@@ -9,7 +9,7 @@ import { ContactService } from '../_services/contact.service';
   styleUrls: ['./contact-table.component.css']
 })
 export class ContactTableComponent implements OnInit {
-  contacts: any;
+  contacts: Contact[];
 
   constructor(private contactService: ContactService, private router: Router) { }
 
@@ -35,11 +35,15 @@ export class ContactTableComponent implements OnInit {
   searchContact() {
     const lastname = document.getElementById('lastname') as HTMLInputElement;
 
-    if(lastname.value !== ""){
-        this.router.navigateByUrl('/contactForm/lastname/' + lastname.value);
-    }else {
-      console.log("lastname not match");
-    }
+    this.contactService.getContactByLastname(lastname.value).subscribe(contacts => {
+      this.contacts = contacts;
+    });
+
+    // if(lastname.value !== ""){
+    //     this.router.navigateByUrl('/contactForm/lastname/' + lastname.value);
+    // }else {
+    //   console.log("lastname not match");
+    // }
   }
 
 }
