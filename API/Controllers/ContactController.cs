@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace API.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class ContactController : Controller
     {
@@ -32,17 +33,27 @@ namespace API.Controllers
             return await _contactRepository.GetContactByIdAsync(id);
         }
 
+        [HttpGet("lastname/{lastname}")]
+        public async Task<ActionResult<Contact>> GetContactByLastname(string lastname)
+        {
+            return await _contactRepository.GetContactByLastnameAsync(lastname.ToLower());
+        }
+
         [HttpPost]
         public async Task<ActionResult<Contact>> AddContact(ContactDto contactDto)
         {
+            
+            contactDto.LastName.ToLower();
             return await _contactRepository.AddContactAsync(contactDto);
         }
 
-        [HttpPut]
-        public async Task<ActionResult> UpdateContact(Contact contact)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateContact(int id, Contact contact)
         {
-            var contactInfo = await _contactRepository.UpdateContactAsync(contact);
-
+            var contactInfo = await _contactRepository.UpdateContactAsync(id, contact);
+            if (contactInfo == null)
+                return NotFound();
+                
             return Ok(contactInfo);            
         }
 
@@ -55,6 +66,6 @@ namespace API.Controllers
             return BadRequest("Deleting Error");
         }
 
-
+        
     }
 }

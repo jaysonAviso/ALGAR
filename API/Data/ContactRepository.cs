@@ -56,14 +56,19 @@ namespace API.Data
             return await _context.SaveChangesAsync() > 0;
         }
 
+        public async Task<Contact> GetContactByLastnameAsync(string lastname)
+        {
+            return await _context.Contacts.SingleOrDefaultAsync(x => x.LastName == lastname);
+        }
+
         public void Update(Contact contact)
         {
             _context.Entry(contact).State = EntityState.Modified;
         }
 
-        public async Task<Contact> UpdateContactAsync(Contact contact)
+        public async Task<Contact> UpdateContactAsync(int id, Contact contact)
         {
-            var contactInfo = await GetContactByIdAsync(contact.Id);
+            var contactInfo = await GetContactByIdAsync(id);
 
             if (contactInfo == null)
                 return contactInfo;

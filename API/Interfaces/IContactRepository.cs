@@ -14,7 +14,8 @@ namespace API.Interfaces
         Task<bool> DeleteContact(int id);
         Task<IEnumerable<Contact>> GetContactsAsync();
         Task<Contact> GetContactByIdAsync(int id);
-        Task<Contact> UpdateContactAsync(Contact contact);
+        Task<Contact> GetContactByLastnameAsync(string lastname);
+        Task<Contact> UpdateContactAsync(int id, Contact contact);
         Task<Contact> AddContactAsync(ContactDto contactDto);
     }
 }

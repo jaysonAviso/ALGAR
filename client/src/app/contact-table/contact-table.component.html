@@ -1,0 +1,33 @@
+<form class="container">
+  <div class="form-group">
+    <label for="lastname">Last Name</label>
+    <input type="text" class="form-control" id="lastname" placeholder="Enter Last Name">
+  </div>
+  <div class="form-group">
+    <button type="button" class="btn btn-primary mr-4" (click)="searchContact()">Search</button>
+    <button type="button" routerLink="/contactForm" class="btn btn-primary">Add</button>
+  </div>
+  <table class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>Last Name</th>
+            <th>First Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let contact of contacts">
+        <tr>
+            <td>{{contact.lastName}}</td>
+            <td>{{contact.firstName}}</td>
+            <td>{{contact.phone}}</td>
+            <td>{{contact.email}}</td>
+            <td>
+              <i class="fa fa-pencil mr-3" routerLink="/contactForm/{{contact.id}}"></i>
+              <i class="fa fa-trash" (click)="deleteContact(contact.id)"></i>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+</form>

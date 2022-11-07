@@ -1,1 +1,27 @@
-<p>contact-form works!</p>
+<form class="container" [formGroup]="registerForm" (ngSubmit)="addContact()">
+  <h1 class="form--heading">Register Form</h1>
+
+  <div class="form-group">
+    <label for="lastname">Last Name</label>
+    <input type="text" class="form-control" formControlName="lastname" id="lastname" placeholder="Enter Last Name">
+  </div>
+  <div class="form-group">
+    <label for="firstname">First Name</label>
+    <input type="text" class="form-control" formControlName="firstname" id="firstname" placeholder="Enter First Name">
+  </div>
+  <div class="form-group">
+    <label for="phone">Phone Number</label>
+    <input type="text" class="form-control" formControlName="phone" id="phone" placeholder="Enter Phone No.">
+  </div>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" formControlName="email" id="email" placeholder="Example@email.com">
+  </div>
+  <div class="form-group">
+    <button type="submit" class="btn btn-primary mr-4" *ngIf="!updateMode" [disabled]="!registerForm.dirty">Submit</button>
+    <button type="button" class="btn btn-primary mr-4" *ngIf="updateMode" [disabled]="!registerForm.dirty" (click)="updateContact(contact.id)">Update</button>
+    <button type="button" class="btn btn-primary" (click)="cancel()">Cancel</button>
+  </div>
+</form>
+  
+  

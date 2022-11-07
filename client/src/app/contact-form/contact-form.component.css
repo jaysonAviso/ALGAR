@@ -1,0 +1,8 @@
+.container {
+    width: 50%;
+    margin: auto;
+}
+.form--heading {
+    margin-top: 5rem;
+    text-align: center;
+}
