@@ -27,8 +27,6 @@ namespace API.Data
 
             await _context.Contacts.AddAsync(contact);
 
-            await _context.SaveChangesAsync();
-
             return contact;
         }
 
@@ -85,8 +83,6 @@ namespace API.Data
 
             _context.Contacts.Update(contactInfo);
             
-            await SaveAllAsync();
-
             return contactInfo;
         }
     }

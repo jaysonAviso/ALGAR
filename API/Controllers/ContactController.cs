@@ -44,17 +44,24 @@ namespace API.Controllers
         {
             
             contactDto.LastName.ToLower();
-            return await _contactRepository.AddContactAsync(contactDto);
+            await _contactRepository.AddContactAsync(contactDto);
+
+            if(await _contactRepository.SaveAllAsync())
+                return Ok();
+
+            return BadRequest("Failed to add contact");
+
         }
 
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateContact(int id, Contact contact)
         {
             var contactInfo = await _contactRepository.UpdateContactAsync(id, contact);
-            if (contactInfo == null)
-                return NotFound();
-                
-            return Ok(contactInfo);            
+            
+            if (await _contactRepository.SaveAllAsync())
+                return Ok(contactInfo);
+
+            return BadRequest("Failed to update!");            
         }
 
         [HttpDelete("{id}")]
